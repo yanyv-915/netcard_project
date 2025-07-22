@@ -7,8 +7,7 @@
       "command": "g++",
       "args": [
         "-g",
-        "main.cpp",
-        "card.cpp",
+        "*.cpp",
         "-o",
         "main.exe"
       ],
