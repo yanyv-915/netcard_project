@@ -1,11 +1,20 @@
 #include"card.h"
-#include"assit.h"
 #include<iostream>
-
+#include<cctype>
+#include<string>
+#include<windows.h>
 using namespace std;
+bool isValidNumber(std::string &s){
+    for(char c:s){
+        if(s.empty()) return false;
+        if(!isdigit(c)) return false;
+    }
+    return true;
+}
 int main(){
     cout<<"欢迎使用网卡计费管理系统！\n";
     CardManager cm;
+    Card c;
     while(true)
     {
         cout << "1.添加卡\n";
@@ -14,7 +23,6 @@ int main(){
         cout << "4.下机\n";
         cout << "5.充值\n";
         cout << "6.注销卡\n";
-        cout << "7.查找当前卡过去使用情况\n";
         cout << "0.退出\n";
         cout << "请输入您的选择：\n";
         string input;
@@ -39,30 +47,35 @@ int main(){
             system("cls");
             break;
         case 2:
-            for(auto c:cm.findCard()){
-                cout<<c<<"\n";
+        {
+            Card *target = cm.findCard();
+            
+            if(target!= nullptr)
+            {
+                cout << "查找成功！\n";
+                cout << *target;
             }
             system("pause");
             system("cls");
-
             break;
+        }
         case 3:
+            c.login(cm);
             system("pause");
             system("cls");
             break;
         case 4:
+            c.logout(cm);
             system("pause");
             system("cls");
             break;
         case 5:
+            c.recharge(cm);
             system("pause");
             system("cls");
             break;
         case 6:
-            system("pause");
-            system("cls");
-            break;
-        case 7:
+            cm.deleteCard();
             system("pause");
             system("cls");
             break;
